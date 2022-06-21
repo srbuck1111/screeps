@@ -9,11 +9,11 @@ var spawnHelper = {
             }
         }
     
-        var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgraders');
+        var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
         console.log('Upgraders: ' + upgraders.length);
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
         console.log('Harvesters: ' + harvesters.length);
-        var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'Builders');
+        var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
         console.log('Builders: ' + builders.length);
     
         if (Game.spawns['Spawn1'].store[RESOURCE_ENERGY] >= 300) {
