@@ -17,18 +17,17 @@ var spawnHelper = {
         console.log('Builders: ' + builders.length);
     
         if (Game.spawns['Spawn1'].store[RESOURCE_ENERGY] >= 300) {
-            var quota = 2
-            if(harvesters.length < 2 * quota) {
+            if(harvesters.length < 2) {
                 var newName = 'Harvester' + Game.time;
                 console.log('Spawning new harvester: ' + newName);
                 Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
                     {memory: {role: 'harvester'}});
-            } else if (upgraders.length < 2 * quota) {
+            } else if (upgraders.length < 3) {
                 var newName = 'Upgrader' + Game.time;
                 console.log('Spawning new upgrader: ' + newName);
                 Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
                     {memory: {role: 'upgrader'}});
-            } else if (builders.length < 0 * quota) {
+            } else if (builders.length < 1) {
                 var newName = 'Builder' + Game.time;
                 console.log('Spawning new builder: ' + newName);
                 Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
