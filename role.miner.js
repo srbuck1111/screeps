@@ -21,7 +21,7 @@ var roleMiner = {
         else {
             var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_CONTAINER || structure.structureType == STRUCTURE_STORAGE)  &&
+                        return (structure.structureType == STRUCTURE_CONTAINER || structure.structureType == STRUCTURE_STORAGE) &&
                             structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0 &&
                             creep.pos.getRangeTo(structure) <= 1;
                     }
@@ -31,7 +31,17 @@ var roleMiner = {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             } else {
-                //place (and build?) container nearby
+                var targets = creep.room.find(FIND_CONSTRUCTION_SITES, {
+                    filter: (structure) => {
+                        return (structure.structureType == STRUCTURE_CONTAINER || structure.structureType == STRUCTURE_STORAGE) &&
+                            creep.pos.getRangeTo(structure) <= 1;
+                    }
+                });
+                if (targets.length > 0) {
+                    creep.build(targets[0])
+                } else {
+                    //place container nearby
+                }
             }
         }
 	}

@@ -1,6 +1,7 @@
 var spawnHelper = {
 
-    run: function() {
+    /** @param {Spawn} spawn **/
+    run: function(spawn) {
 
         for(var name in Memory.creeps) {
             if(!Game.creeps[name]) {
@@ -15,6 +16,8 @@ var spawnHelper = {
         console.log('Harvesters: ' + harvesters.length);
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
         console.log('Builders: ' + builders.length);
+        var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
+        console.log('Miners: ' + miners.length);
     
         if (Game.spawns['Spawn1'].store[RESOURCE_ENERGY] >= 300) {
             if(harvesters.length < 2) {
@@ -32,6 +35,8 @@ var spawnHelper = {
                 console.log('Spawning new builder: ' + newName);
                 Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
                     {memory: {role: 'builder'}});
+            } else if (miners.length < 1) {
+                spawnMiner(spawn.room.energyAvailable);
             }
         }
         
@@ -46,6 +51,14 @@ var spawnHelper = {
 
     }
 
+}
+    
+/** @param {Integer} energyAvailable **/
+function spawnMiner(energyAvailable) {
+    var newName = 'Miner' + Game.time;
+    console.log('Spawning new miner: ' + newName);
+    Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
+        {memory: {role: 'miner'}});
 }
 
 module.exports = spawnHelper;
